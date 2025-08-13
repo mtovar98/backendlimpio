@@ -80,6 +80,12 @@ class AuthController extends Controller
         // buscar usuario por id_number
         $user = User::where('id_number', $credentials['id_number'])->first();
 
+        if (! in_array($user->id_roles, [1,2,3])) {
+            return response()->json([
+                'message' => 'Este rol no tiene permitido iniciar sesión'
+            ], 403);
+        }
+
         // 3. Verificar existencia y contraseña
         if (! $user || ! $user->password || ! Hash::check($credentials['password'], $user->password)) {
             return response()->json([
