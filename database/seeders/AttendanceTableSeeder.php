@@ -12,29 +12,24 @@ class AttendanceTableSeeder extends Seeder
         // Asistencias para los usuarios existentes
         $attendances = [
             [
-                'id_users' => 1,
+                'id_users' => 4,
                 'created_at' => now()->subDays(2), // hace 2 días
                 'updated_at' => now()->subDays(2),
             ],
             [
-                'id_users' => 1,
+                'id_users' =>5,
                 'created_at' => now()->subDay(),   // ayer
                 'updated_at' => now()->subDay(),
             ],
             [
-                'id_users' => 2,
+                'id_users' => 6,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id_users' => 3,
+                'id_users' => 7,
                 'created_at' => now()->subDays(3),
                 'updated_at' => now()->subDays(3),
-            ],
-            [
-                'id_users' => 4,
-                'created_at' => now()->subDays(5),
-                'updated_at' => now()->subDays(5),
             ],
         ];
 

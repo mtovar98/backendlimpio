@@ -25,8 +25,8 @@ class UsersTableSeeder extends Seeder
 
         // Administrador
         User::create([
-            'first_name'   => 'Ana',
-            'last_name'    => 'Gómez',
+            'first_name'   => 'alfredo',
+            'last_name'    => 'quintero',
             'id_number'    => 1002,
             'phone'        => '3002000200',
             'email'        => 'admin@atenas.com',
@@ -51,10 +51,46 @@ class UsersTableSeeder extends Seeder
 
         // Usuario Cliente (sin contraseña)
         User::create([
-            'first_name'   => 'Carla',
-            'last_name'    => 'López',
+            'first_name'   => 'usuario1',
+            'last_name'    => 'apellido1',
             'id_number'    => 1004,
-            'phone'        => '3004000400',
+            'phone'        => '3004000401',
+            'email'        => 'cliente@atenas.com',
+            'birth_date'   => '1998-04-04',
+            'id_roles'     => 4,               // Usuario Cliente
+            'users_active' => true,
+            'password'     => null,            // no requiere contraseña
+        ]);
+        // Usuario Cliente (sin contraseña)
+        User::create([
+            'first_name'   => 'usuario2',
+            'last_name'    => 'apellido2',
+            'id_number'    => 1005,
+            'phone'        => '3004000402',
+            'email'        => 'cliente@atenas.com',
+            'birth_date'   => '1998-04-04',
+            'id_roles'     => 4,               // Usuario Cliente
+            'users_active' => true,
+            'password'     => null,            // no requiere contraseña
+        ]);
+        // Usuario Cliente (sin contraseña)
+        User::create([
+            'first_name'   => 'usuario3',
+            'last_name'    => 'apellido3',
+            'id_number'    => 1006,
+            'phone'        => '3004000403',
+            'email'        => 'cliente@atenas.com',
+            'birth_date'   => '1998-04-04',
+            'id_roles'     => 4,               // Usuario Cliente
+            'users_active' => true,
+            'password'     => null,            // no requiere contraseña
+        ]);
+        // Usuario Cliente (sin contraseña)
+        User::create([
+            'first_name'   => 'usuario4',
+            'last_name'    => 'apellido4',
+            'id_number'    => 1007,
+            'phone'        => '3004000404',
             'email'        => 'cliente@atenas.com',
             'birth_date'   => '1998-04-04',
             'id_roles'     => 4,               // Usuario Cliente

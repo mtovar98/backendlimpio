@@ -18,6 +18,7 @@ class Payment extends Model
         'id_users',
         'id_plans',
         'payments_expires_at',
+        'payments_amount'
     ];
 
     /**
@@ -35,4 +36,22 @@ class Payment extends Model
     {
         return $this->belongsTo(Plan::class, 'id_plans', 'id_plans');
     }
+
+    // 1) Que se incluyan en el JSON automáticamente
+    protected $appends = ['payment_status', 'payment_is_active'];
+
+    // 2) Estado del pago según la fecha de vencimiento
+    public function getPaymentStatusAttribute()
+    {
+        $expires = $this->payments_expires_at ? (string)$this->payments_expires_at : null;
+        if (!$expires) return 'vencido';
+        return now()->toDateString() <= $expires ? 'vigente' : 'vencido';
+    }
+
+    // 3) Bandera booleana conveniente
+    public function getPaymentIsActiveAttribute()
+    {
+        return $this->payment_status === 'vigente';
+    }
+
 }

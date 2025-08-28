@@ -14,21 +14,27 @@ class PaymentsTableSeeder extends Seeder
         Payment::create([
             'id_users'           => 4,
             'id_plans'           => 2,
-            'payments_expires_at'=> '2025-08-31',
+            'payments_expires_at'=> '2025-08-14',
         ]);
 
         // Carla – Plan Trimestral (id_plans = 3)
         Payment::create([
-            'id_users'           => 4,
+            'id_users'           => 5,
             'id_plans'           => 3,
             'payments_expires_at'=> '2025-10-30',
         ]);
 
         // Carla – Plan Anual (id_plans = 4)
         Payment::create([
-            'id_users'           => 4,
+            'id_users'           => 6,
             'id_plans'           => 4,
-            'payments_expires_at'=> '2026-07-31',
+            'payments_expires_at'=> '2025-08-28',
+        ]);
+        // Carla – Plan Anual (id_plans = 4)
+        Payment::create([
+            'id_users'           => 7,
+            'id_plans'           => 3,
+            'payments_expires_at'=> '2025-08-29',
         ]);
     }
 }

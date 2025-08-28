@@ -70,10 +70,22 @@ class AttendanceController extends Controller
 
         // 2. Buscar usuario y verificar activo
         $user = User::where('id_number', $idNumber)->first();
+        
+        if ((int)$user->id_roles !== 4) {
+            return response()->json([
+                'message' => 'Solo se registran asistencias a clientes (rol 4).'
+            ], 422);
+        }
         if (! $user->users_active) {
             return response()->json([
                 'message' => 'Usuario inactivo. No se puede registrar asistencia.'
             ], 403);
+        }
+        if (!$user->plan_is_active) { // ← usa el accessor que agregamos
+            return response()->json([
+                'message' => 'El plan está vencido.',
+                'expires_at' => $user->plan_expires_at,
+            ], 422);
         }
 
         // 3. Obtener último pago y validar vigencia
@@ -91,19 +103,6 @@ class AttendanceController extends Controller
             ], 403);
         }
 
-        // 4. Prevenir duplicados en el mismo día
-        $exists = Attendance::where('id_users', $user->id_users)
-                    ->whereDate('created_at', $today)
-                    ->exists();
-
-        if ($exists) {
-            return response()->json([
-                'message'     => 'Asistencia de hoy ya registrada',
-                'plan_status' => 'vigente',
-                'expires_at'  => $lastPayment->payments_expires_at,
-            ], 409);
-        }
-
         // 5. Crear la asistencia
         $attendance = Attendance::create([
             'id_users' => $user->id_users,
@@ -113,8 +112,8 @@ class AttendanceController extends Controller
         return response()->json([
             'message'       => 'Asistencia registrada correctamente',
             'data'          => $attendance,
-            'plan_status'   => 'vigente',
-            'expires_at'    => $lastPayment->payments_expires_at,
+            'plan_status'   => $user->plan_status,
+            'expires_at'    => $user->plan_expires_at,
         ], 201);
     }
 
